@@ -10,6 +10,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.nexaai1.ui.theme.NEXAAI1Theme
 import com.example.nexaai1.viewmodel.ChatViewModel
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 
 @Composable
 fun ChatScreen(
@@ -41,7 +43,27 @@ fun ChatScreen(
             )
         }
 
-        Spacer(modifier = Modifier.weight(1f))
+        LazyColumn(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+        ) {
+
+            items(chatViewModel.messages) { message ->
+
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 4.dp)
+                ) {
+
+                    Text(
+                        text = message.text,
+                        modifier = Modifier.padding(12.dp)
+                    )
+                }
+            }
+        }
 
         OutlinedTextField(
             value = text,
